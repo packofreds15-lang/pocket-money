@@ -1,0 +1,21 @@
+{
+  // Cloudflare Worker settings for Pocket Money.
+  "name": "pocket-money",
+  "main": "worker.js",
+  "compatibility_date": "2025-09-01",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "pocket-money-db",
+      "database_id": "19592b1b-23c3-495d-95cb-da72e6129766"
+    }
+  ],
+  // Keep the variables you add in the Cloudflare dashboard (ADMIN_EMAILS, GOOGLE_CLIENT_ID, ...) on every deploy.
+  "keep_vars": true,
+  "observability": { "enabled": true }
+}

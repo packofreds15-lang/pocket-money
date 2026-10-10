@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pocket Money</title>
+<meta name="description" content="Free lessons, a pocket money tracker, a practice portfolio and real company research, made for teens.">
+<meta name="theme-color" content="#14213D">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Pocket Money">
+<meta property="og:title" content="Pocket Money">
+<meta property="og:description" content="Learn to manage your money and invest before real money is on the line.">
+<meta property="og:image" content="icons/icon-512.png">
+<link rel="preload" href="fonts/bricolage.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <button class="logo" data-go="home" aria-label="Pocket Money home">
+      <svg class="coin" width="30" height="30" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" fill="#E0B21E"/><circle cx="16" cy="15" r="14" fill="#FFD84A"/>
+        <circle cx="16" cy="15" r="10.5" fill="none" stroke="#C99A12" stroke-width="1.5" stroke-dasharray="2 1.6"/>
+        <path d="M10 19 L14 14.5 L17 16.5 L22 10.5" fill="none" stroke="#14213D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M18.5 10.5 H22 V14" fill="none" stroke="#14213D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <ellipse cx="11" cy="8.5" rx="3.2" ry="1.4" fill="#FFF3B8" opacity=".8" transform="rotate(-30 11 8.5)"/>
+      </svg>
+      Pocket Money
+    </button>
+    <nav class="tabs" aria-label="Main">
+      <button data-go="learn">Learn</button>
+      <button data-go="money">My money</button>
+      <button data-go="portfolio">Portfolio</button>
+      <button data-go="research">Research</button>
+      <button data-go="quiz">Quiz</button>
+      <button data-go="guide">Cheat sheet</button>
+    </nav>
+    <span class="spacer"></span>
+    <button class="install-btn" id="install-btn" type="button">Install app</button>
+    <button class="me-btn signin desk" id="me-btn" type="button">Sign in</button>
+  </div>
+</header>
+
+<nav class="bottom-nav" aria-label="App">
+  <button data-go="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>Home</button>
+  <button data-go="learn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/></svg>Learn</button>
+  <button data-go="money"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><circle cx="16.5" cy="14.5" r="1.3"/></svg>Money</button>
+  <button data-go="portfolio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>Invest</button>
+  <button data-go="research"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>Research</button>
+  <button data-go="account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Me</button>
+</nav>
+
+<main class="wrap">
+
+<!-- HOME -->
+<section class="page" id="page-home">
+  <div class="hero">
+    <div>
+      <h1>Learn to handle money before real money is on the line.</h1>
+      <p class="lede">Short lessons on pocket money and investing, a tracker for what you really get and spend, a practice portfolio, and research on thousands of real companies.</p>
+      <div class="row">
+        <button class="btn" data-go="quiz">Take the 2‑minute starting quiz</button>
+        <button class="btn alt" data-go="learn">Start the lessons</button>
+      </div>
+    </div>
+    <div class="calc" aria-labelledby="calc-title">
+      <h3 id="calc-title">What starting early is worth</h3>
+      <label for="c-amt">Invest each month <span id="c-amt-v"></span></label>
+      <input id="c-amt" type="range" min="100" max="5000" step="100" value="500">
+      <label for="c-age">Starting age <span id="c-age-v"></span></label>
+      <input id="c-age" type="range" min="13" max="35" step="1" value="15">
+      <div class="bars" id="c-bars" aria-hidden="true"></div>
+      <div class="legend"><span style="--c:var(--line)">Money you put in</span><span style="--c:var(--blue)">Value with 7% average yearly growth</span></div>
+      <p class="result" id="c-result"></p>
+      <p class="sub" id="c-sub"></p>
+    </div>
+  </div>
+
+  <h2>What's inside</h2>
+  <div class="features">
+    <button class="feature" data-go="learn"><h3>Money basics</h3><p>Eight lessons on needs and wants, budgets, saving goals, smart spending, UPI safety and borrowing.</p></button>
+    <button class="feature" data-go="money"><h3>My money tracker</h3><p>Log your pocket money and spending, set a budget, save automatically and work towards goals.</p></button>
+    <button class="feature" data-go="learn" data-track="invest"><h3>Investing lessons</h3><p>Stocks, risk, diversification, volatility and compound growth, each with a quick check.</p></button>
+    <button class="feature" data-go="portfolio"><h3>Practice portfolio</h3><p>Buy and sell with pretend money, skip ahead in time, and compare yourself with an index fund.</p></button>
+    <button class="feature" data-go="research"><h3>Company research</h3><p>Search 8,800+ real companies in the US and India, from Tesla and IBM to Reliance and TCS.</p></button>
+    <button class="feature" data-go="quiz"><h3>Before and after quiz</h3><p>Take it now and again when you finish to see how much you've learned.</p></button>
+  </div>
+  <div class="band" id="home-account-band">
+    <div><h3 style="margin:0 0 4px">Keep your progress everywhere</h3><p>Create a free account to save your lessons, money tracker and portfolio across your phone and laptop.</p></div>
+    <button class="btn" data-open-login="signup">Create a free account</button>
+  </div>
+  <p class="note">Pocket Money is for learning only and is not financial advice. The companies in the practice portfolio are made up and their prices are simulated. Real-company prices are shown with a 30‑day delay. The 7% growth figure in the calculator is a common long‑run assumption for a broad stock market, not a promise: real returns change every year and can be negative.</p>
+</section>
+
+<!-- LEARN -->
+<section class="page" id="page-learn">
+  <div class="page-head"><h2>Lessons</h2><p>About five minutes each. Start with money basics, then move on to investing. Short on time? Read the <a href="#guide" data-go="guide">cheat sheet</a>.</p></div>
+  <div class="track-tabs" role="group" aria-label="Lesson track">
+    <button data-track-btn="money" aria-pressed="true">Money basics</button><button data-track-btn="invest" aria-pressed="false">Investing</button>
+  </div>
+  <div class="learn">
+    <div>
+      <p class="muted small" id="track-progress-label" style="margin:0"></p>
+      <div class="progress-line"><div id="track-progress"></div></div>
+      <ol class="lesson-list" id="lesson-list"></ol>
+    </div>
+    <div class="lesson" id="lesson"></div>
+  </div>
+</section>
+
+<!-- MY MONEY -->
+<section class="page" id="page-money">
+  <div class="page-head"><h2>My money</h2><p id="mm-intro">Keep track of the pocket money you get and what you spend it on.</p></div>
+  <div class="pf-top" id="mm-stats"></div>
+  <div class="mm-grid">
+    <div class="stack">
+      <div class="card form">
+        <h3>Add money in or out</h3>
+        <div class="seg" role="group" aria-label="Money in or out">
+          <button id="mm-in" aria-pressed="true">Money in</button><button id="mm-out" aria-pressed="false">Money out</button>
+        </div>
+        <label for="mm-amt">Amount</label>
+        <input id="mm-amt" type="number" min="0" step="any" inputmode="decimal" placeholder="0">
+        <label for="mm-cat">Category</label>
+        <select id="mm-cat"></select>
+        <div id="mm-nw-wrap" hidden>
+          <label>Was it a need or a want?</label>
+          <div class="nw"><label><input type="radio" name="mm-nw" value="need"> Need</label><label><input type="radio" name="mm-nw" value="want" checked> Want</label></div>
+        </div>
+        <label for="mm-note">Note (optional)</label>
+        <input id="mm-note" type="text" maxlength="60" placeholder="e.g. Weekly pocket money">
+        <label for="mm-date">Date</label>
+        <input id="mm-date" type="date">
+        <div class="row" style="margin-top:12px"><button class="btn" id="mm-add">Add</button></div>
+        <p class="msg" id="mm-msg" role="status"></p>
+      </div>
+      <div class="card form">
+        <h3>Saving up for</h3>
+        <div id="mm-goals"></div>
+        <label for="mm-gname">New goal</label>
+        <input id="mm-gname" type="text" maxlength="40" placeholder="e.g. Headphones">
+        <label for="mm-gtarget">How much it costs</label>
+        <input id="mm-gtarget" type="number" min="1" step="any" inputmode="decimal" placeholder="0">
+        <label for="mm-gdate">When you want it by (optional)</label>
+        <input id="mm-gdate" type="date">
+        <div class="row" style="margin-top:12px"><button class="btn alt" id="mm-gadd">Add goal</button></div>
+        <p class="msg" id="mm-gmsg" role="status"></p>
+      </div>
+      <div class="card form">
+        <details class="settings" id="mm-settings">
+          <summary>Budget and automatic saving</summary>
+          <label for="mm-budget">Monthly spending budget</label>
+          <input id="mm-budget" type="number" min="0" step="any" inputmode="decimal" placeholder="No budget set">
+          <label for="mm-autopct">Save automatically when money comes in</label>
+          <div class="inline"><select id="mm-autopct"><option value="0">Off</option><option value="10">10%</option><option value="20">20%</option><option value="25">25%</option><option value="30">30%</option><option value="50">50%</option></select>
+            <span>into</span><select id="mm-autogoal"></select></div>
+          <label>Regular pocket money</label>
+          <div class="inline"><input id="mm-ramt" type="number" min="0" step="any" inputmode="decimal" placeholder="Amount" style="width:110px!important">
+            <select id="mm-rfreq"><option value="">Not set</option><option value="week">every week</option><option value="month">every month</option></select>
+            <select id="mm-rday" aria-label="Which day"></select></div>
+          <p class="muted small" style="margin:6px 0 0">Regular pocket money is added for you on the right day, so you only log what you spend.</p>
+          <label for="mm-cur">Currency</label>
+          <select id="mm-cur"><option value="INR">₹ Rupees</option><option value="USD">$ Dollars</option><option value="GBP">£ Pounds</option><option value="EUR">€ Euros</option></select>
+          <div class="row" style="margin-top:14px"><button class="btn" id="mm-save-settings">Save settings</button><button class="btn danger small" id="mm-clear">Clear all my money data</button></div>
+          <p class="msg" id="mm-smsg" role="status"></p>
+        </details>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="card">
+        <div class="row" style="justify-content:space-between;margin-bottom:6px">
+          <h3 style="margin:0">Where it went</h3>
+          <div class="month-nav"><button id="mm-prev" aria-label="Previous month">‹</button><b id="mm-month"></b><button id="mm-next" aria-label="Next month">›</button></div>
+        </div>
+        <div id="mm-breakdown"></div>
+      </div>
+      <div class="card">
+        <h3>History</h3>
+        <ul class="tx" id="mm-tx"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="page" id="page-portfolio">
+  <div class="page-head"><h2>Your practice portfolio</h2><p>You start with $10,000 of pretend money. Buy some companies, then skip ahead in time to see what happens. These companies are made up and prices are simulated, so every run teaches something different. To look at real companies, use <a href="#research" data-go="research">Research</a>.</p></div>
+  <div class="pf-top" id="pf-stats"></div>
+  <div class="row" style="margin-bottom:16px">
+    <button class="btn blue" id="pf-next">Skip ahead 1 month</button>
+    <button class="btn alt" id="pf-year">Skip ahead 1 year</button>
+    <button class="btn alt" id="pf-reset">Start over</button>
+  </div>
+  <div class="pf-grid">
+    <div class="stack">
+      <div class="card">
+        <h3>Portfolio value over time</h3>
+        <div id="pf-chart"></div>
+        <div class="legend"><span style="--c:var(--blue)">Your portfolio</span><span style="--c:var(--muted)">If you'd put everything in the index fund</span></div>
+      </div>
+      <div class="card"><h3>What you own</h3><div class="scroll-x" id="pf-holdings"></div></div>
+    </div>
+    <div class="stack">
+      <div class="card form">
+        <h3>Buy or sell</h3>
+        <label for="t-sym">Company</label>
+        <select id="t-sym"></select>
+        <p class="muted" id="t-info" style="margin:6px 0 0;font-size:.9rem"></p>
+        <label for="t-amt">Amount in dollars</label>
+        <input id="t-amt" type="number" min="1" step="1" value="1000" inputmode="decimal">
+        <div class="row" style="margin-top:12px">
+          <button class="btn" id="t-buy">Buy</button><button class="btn alt" id="t-sell">Sell</button><button class="btn alt" id="t-sellall">Sell all of it</button>
+        </div>
+        <p class="msg" id="t-msg" role="status"></p>
+      </div>
+      <div class="card"><h3>How spread out are you?</h3><div id="pf-div"></div></div>
+      <div class="card"><h3>News this month</h3><ul class="news" id="pf-news"></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section class="page" id="page-research">
+  <div id="rs-search">
+    <div class="page-head"><h2>Research a company</h2><p>Search 8,800+ real companies listed in the US and India. See what each one does, how its share price has moved, and whether it's growing and making a profit.</p></div>
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      <input id="rs-q" type="search" placeholder="Search by name or ticker, e.g. Tesla, IBM, SpaceX, Reliance" autocomplete="off" aria-label="Search companies">
+    </div>
+    <div class="filters" role="group" aria-label="Filters">
+      <button class="chip" data-mkt="" aria-pressed="true">All</button>
+      <button class="chip" data-mkt="US" aria-pressed="false">US</button>
+      <button class="chip" data-mkt="IN" aria-pressed="false">India</button>
+      <select id="rs-sector" aria-label="Sector"><option value="">All sectors</option></select>
+    </div>
+    <div id="rs-body"></div>
+  </div>
+  <div id="rs-detail" hidden></div>
+</section>
+
+<!-- QUIZ -->
+<section class="page" id="page-quiz">
+  <div class="page-head"><h2>Check what you know</h2><p id="quiz-intro"></p></div>
+  <div id="quiz-results"></div>
+  <div id="quiz" style="max-width:760px"></div>
+  <div id="quiz-feedback" style="max-width:760px"></div>
+</section>
+
+<!-- CHEAT SHEET -->
+<section class="page" id="page-guide">
+  <div class="page-head"><h2>Cheat sheet</h2><p>The ideas worth remembering if you forget everything else.</p></div>
+  <h3>Money</h3>
+  <ol class="tips" style="margin-bottom:28px">
+    <li><div><b>Know where your money goes.</b>Writing down what you spend for just one month usually shows you something surprising.</div></li>
+    <li><div><b>Pay yourself first.</b>Put some money aside for saving as soon as you get it, before you start spending.</div></li>
+    <li><div><b>Wait a day before buying wants.</b>If you still want it tomorrow, it's probably worth it. Many impulse buys don't survive the wait.</div></li>
+    <li><div><b>Never share your OTP or UPI PIN.</b>You never need a PIN to receive money. Anyone asking for one is trying to take it.</div></li>
+    <li><div><b>Borrowing costs money.</b>Interest means you pay back more than you borrowed, so avoid borrowing for things you only want.</div></li>
+  </ol>
+  <h3>Investing</h3>
+  <ol class="tips" style="counter-reset:tip 5">
+    <li><div><b>A share is a small piece of a real business.</b>When the business grows and earns more, the share usually becomes worth more over time.</div></li>
+    <li><div><b>Only invest money you won't need for at least five years.</b>Short‑term money belongs in savings, where it can't drop right before you need it.</div></li>
+    <li><div><b>Higher possible returns come with higher risk.</b>Anyone promising big, guaranteed returns is either wrong or running a scam.</div></li>
+    <li><div><b>Don't put all your eggs in one basket.</b>Owning many companies across different industries means one bad result can't sink you.</div></li>
+    <li><div><b>Index funds are the simplest way to diversify.</b>One purchase gives you a small slice of hundreds of companies, usually with low fees.</div></li>
+    <li><div><b>Prices go up and down; that's normal.</b>Selling in a panic after a drop turns a temporary dip into a permanent loss.</div></li>
+    <li><div><b>Time is your biggest advantage.</b>Compound growth needs years to work, and teenagers have more years than anyone.</div></li>
+    <li><div><b>Fees quietly eat your returns.</b>A 1–2% yearly fee sounds tiny but can cost a large share of your final amount over decades.</div></li>
+    <li><div><b>Be skeptical of social media tips.</b>Ask who benefits if you buy, check reliable sources, and never invest in something you can't explain.</div></li>
+    <li><div><b>Talk to a trusted adult first.</b>In India and most countries you need a parent or guardian to open an investment account until you're 18.</div></li>
+  </ol>
+</section>
+
+<!-- ABOUT / FOUNDER -->
+<section class="page" id="page-about">
+  <div id="founder"></div>
+  <div class="mission">
+    <div><h3>The problem</h3><p>Teenagers see investing all over social media, but few understand the basics behind stocks, risk or saving, and most money advice isn't written for them.</p></div>
+    <div><h3>What we do</h3><p>Simple lessons, a tracker for real pocket money, a practice portfolio with pretend money, and research tools for real companies.</p></div>
+    <div><h3>Our promise</h3><p>Free to use, no ads, no stock tips. Everything is checked against reliable sources and nothing here is financial advice.</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="page" id="page-contact">
+  <div class="page-head"><h2>Contact us</h2><p>Questions, feedback, school partnerships or privacy requests: send a message and we'll reply by email.</p></div>
+  <div class="acct">
+    <form class="card form" id="contact-form" novalidate>
+      <label for="ct-name">Your name</label><input id="ct-name" maxlength="80" autocomplete="name">
+      <label for="ct-email">Your email</label><input id="ct-email" type="email" maxlength="254" autocomplete="email" required>
+      <label for="ct-topic">What's it about?</label>
+      <select id="ct-topic"><option value="question">A question</option><option value="feedback">Feedback or an idea</option><option value="school">Using Pocket Money at my school</option><option value="bug">Something isn't working</option><option value="privacy">Privacy or my data</option><option value="other">Something else</option></select>
+      <label for="ct-msg">Message</label><textarea id="ct-msg" maxlength="3000" required></textarea>
+      <div class="hp" aria-hidden="true"><label for="ct-web">Leave this empty</label><input id="ct-web" tabindex="-1" autocomplete="off"></div>
+      <div class="row" style="margin-top:14px"><button class="btn" type="submit" id="ct-send">Send message</button></div>
+      <p class="msg" id="ct-status" role="status"></p>
+    </form>
+    <div class="stack">
+      <div class="card"><h3>Teachers and schools</h3><p style="margin:0">Pocket Money is free for classrooms. Students can take the starting quiz, work through a few lessons, then take the quiz again to see what they learned. Choose "Using Pocket Money at my school" and we'll help you set it up.</p></div>
+      <div class="card" id="contact-direct" hidden></div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCOUNT -->
+<section class="page" id="page-account">
+  <div id="account"></div>
+</section>
+
+<!-- ADMIN -->
+<section class="page" id="page-admin">
+  <div class="page-head"><h2>Admin</h2><p>Only admins can see this page.</p></div>
+  <div class="admin-tabs" role="group" aria-label="Admin sections">
+    <button class="chip" data-atab="overview" aria-pressed="true">Overview</button>
+    <button class="chip" data-atab="impact" aria-pressed="false">Impact</button>
+    <button class="chip" data-atab="users" aria-pressed="false">Users</button>
+    <button class="chip" data-atab="messages" aria-pressed="false">Messages</button>
+    <button class="chip" data-atab="founder" aria-pressed="false">Founder page</button>
+  </div>
+  <div id="admin"></div>
+</section>
+
+<!-- LEGAL -->
+<section class="page" id="page-privacy">
+  <div class="legal-nav"><button class="chip" aria-pressed="true">Privacy</button><button class="chip" data-go="terms">Terms</button><button class="chip" data-go="cookies">Cookies</button><button class="chip" data-go="disclaimer">Disclaimer</button></div>
+  <div class="prose">
+    <h2>Privacy policy</h2>
+    <p class="muted">Last updated 9 October 2026</p>
+    <p>Pocket Money is a free website that teaches teenagers about money and investing. This policy explains, in plain language, what information we collect, why, and what you can do about it. If anything is unclear, <a href="#contact" data-go="contact">contact us</a>.</p>
+
+    <h3>Who we are</h3>
+    <p>Pocket Money is run by its founder, Tvesha, in India. We decide how your information is used, which makes us the "data controller" (GDPR) or "data fiduciary" (India's Digital Personal Data Protection Act, 2023). To reach us about privacy, use the <a href="#contact" data-go="contact">contact form</a> and choose "Privacy or my data".</p>
+
+    <h3>If you use Pocket Money without an account</h3>
+    <ul>
+      <li>Your lesson progress, quiz scores, money tracker and practice portfolio are saved <b>only in your browser on your device</b>. We can't see them.</li>
+      <li>We count how many times each section of the site is opened each day. These counts don't include any name, cookie or ID, so they can't be linked to you.</li>
+      <li>Our hosting provider briefly processes your IP address to deliver the site and protect it from abuse. We use a scrambled (hashed) version of it to limit repeated form submissions.</li>
+    </ul>
+
+    <h3>If you create an account</h3>
+    <ul>
+      <li><b>Email address</b>, to sign you in. If you use Google, we also receive your Google account ID and first name.</li>
+      <li><b>First name</b> (optional) and <b>age group</b> (13–17 or 18+).</li>
+      <li>If you're 13–17, a record that you confirmed your <b>parent or guardian agrees</b>.</li>
+      <li>Your <b>saved progress</b>: lessons, quiz scores, money tracker entries and goals, practice portfolio and company watchlist, so it works on all your devices.</li>
+      <li><b>Activity dates</b>: the days you used the site and when you were last active, so we can see how many people use Pocket Money.</li>
+      <li><b>Feedback</b> you choose to send, like a star rating or comment.</li>
+    </ul>
+    <p>Your money tracker shows the amounts and notes you type. They're private to you: we only use them to show you your own tracker and to count, in total, how many people use the tracker.</p>
+
+    <h3>If you contact us</h3>
+    <p>We keep your name, email and message so we can reply. We delete messages after 12 months.</p>
+
+    <h3>Why we use it (our legal basis)</h3>
+    <ul>
+      <li><b>To run your account and save your progress</b>: needed to provide the service you asked for.</li>
+      <li><b>To keep the site secure and stop abuse</b>: our legitimate interest in protecting users.</li>
+      <li><b>To see whether Pocket Money helps people learn</b> (for example, average quiz scores before and after the lessons): our legitimate interest, using totals and averages, never published with names.</li>
+      <li><b>For users aged 13–17</b>: the agreement of a parent or guardian, which they can withdraw at any time by asking us to delete the account.</li>
+    </ul>
+
+    <h3>Children</h3>
+    <p>Accounts are for people aged 13 and over. Anyone younger can use every lesson and tool without an account; their progress stays on their own device. If you're 13–17, you need a parent or guardian's agreement before creating an account. Parents and guardians can contact us at any time to see or delete their child's information. We never show ads, never sell data and never use your information to profile you.</p>
+
+    <h3>Who else handles your information</h3>
+    <p>We never sell your information or share it for advertising. We use these service providers, who only process it on our behalf:</p>
+    <ul>
+      <li><b>Cloudflare</b>: hosting and our database.</li>
+      <li><b>Google</b>: only if you choose "Continue with Google".</li>
+      <li><b>Resend</b>: sends sign-in emails and passes contact-form messages to us.</li>
+    </ul>
+    <p>These providers may store information on servers outside your country, including in the United States. Where the GDPR applies, they protect it using approved safeguards such as standard contractual clauses.</p>
+
+    <h3>How long we keep it</h3>
+    <ul>
+      <li>Account information and saved progress: until you delete your account. Accounts that haven't been used for 24 months are deleted automatically.</li>
+      <li>Sign-in links: 20 minutes. Sign-in sessions: up to 30 days.</li>
+      <li>Contact messages: 12 months.</li>
+      <li>Daily page counts: kept as totals, with nothing that identifies you.</li>
+    </ul>
+
+    <h3>Your rights</h3>
+    <p>Wherever you live, you can:</p>
+    <ul>
+      <li><b>Get a copy of your data</b>: use "Download my data" on your <a href="#account" data-go="account">account page</a>.</li>
+      <li><b>Correct it</b>: change your name on your account page, or contact us.</li>
+      <li><b>Delete it</b>: use "Delete my account" on your account page. Everything linked to your account is erased straight away.</li>
+      <li><b>Object or withdraw consent</b>, and ask us questions about how your information is used.</li>
+      <li><b>Complain</b> to a data protection authority: in India, the Data Protection Board of India; in the EU, your national authority; in the UK, the Information Commissioner's Office. We'd appreciate the chance to sort it out first.</li>
+    </ul>
+    <p>We'll reply to requests within 30 days.</p>
+
+    <h3>Security</h3>
+    <p>Pocket Money doesn't use passwords: you sign in with Google or a one-time email link, so there's no password for anyone to steal. Connections are encrypted, sign-in tokens are stored only in scrambled form, and only the founder can open the admin panel.</p>
+
+    <h3>Changes</h3>
+    <p>If we change this policy, we'll update the date at the top. If a change affects how we use information you've already given us, we'll tell signed-in users on the site first.</p>
+  </div>
+</section>
+
+<section class="page" id="page-terms">
+  <div class="legal-nav"><button class="chip" data-go="privacy">Privacy</button><button class="chip" aria-pressed="true">Terms</button><button class="chip" data-go="cookies">Cookies</button><button class="chip" data-go="disclaimer">Disclaimer</button></div>
+  <div class="prose">
+    <h2>Terms of use</h2>
+    <p class="muted">Last updated 9 October 2026</p>
+    <p>By using Pocket Money you agree to these terms. They're written to be short and clear.</p>
+    <h3>What Pocket Money is</h3>
+    <p>A free educational website about money and investing. It is <b>not</b> a bank, broker, investment adviser or research analyst, and it isn't registered with SEBI or any other financial regulator. Nothing on the site is a recommendation to buy or sell anything. See the <a href="#disclaimer" data-go="disclaimer">disclaimer</a>.</p>
+    <h3>Who can use it</h3>
+    <p>Anyone can use the lessons and tools. You must be 13 or older to create an account, and if you're 13–17 you need a parent or guardian's agreement.</p>
+    <h3>Your account</h3>
+    <ul>
+      <li>Keep access to your email or Google account safe, since that's how you sign in.</li>
+      <li>You can delete your account at any time from your account page.</li>
+      <li>We may suspend accounts that misuse the site.</li>
+    </ul>
+    <h3>Using the site fairly</h3>
+    <p>Don't try to break, overload or get unauthorised access to the site; don't use it to send spam or harmful content; and don't copy large parts of it to republish elsewhere.</p>
+    <h3>Pretend money and real data</h3>
+    <p>The practice portfolio uses made-up companies, simulated prices and pretend money that has no value. Real-company information on the Research page comes from third-party sources, is delayed, and may contain mistakes or gaps.</p>
+    <h3>Our content</h3>
+    <p>The lessons, design and guides on Pocket Money belong to Pocket Money. You're welcome to share links and use them for personal learning or in a classroom.</p>
+    <h3>No guarantees</h3>
+    <p>We work hard to keep everything accurate and the site running, but we provide it "as is" and can't promise it will always be available or error-free. To the extent the law allows, Pocket Money isn't responsible for losses from decisions you make using the site.</p>
+    <h3>Changes and law</h3>
+    <p>We may update these terms; the date at the top shows the latest version. These terms are governed by the laws of India, without taking away any rights you have under the laws of where you live.</p>
+  </div>
+</section>
+
+<section class="page" id="page-cookies">
+  <div class="legal-nav"><button class="chip" data-go="privacy">Privacy</button><button class="chip" data-go="terms">Terms</button><button class="chip" aria-pressed="true">Cookies</button><button class="chip" data-go="disclaimer">Disclaimer</button></div>
+  <div class="prose">
+    <h2>Cookies and device storage</h2>
+    <p class="muted">Last updated 9 October 2026</p>
+    <p>Pocket Money has <b>no advertising, tracking or analytics cookies</b>. It only stores what it needs to work, which is why we don't ask you to accept cookies.</p>
+    <div class="scroll-x"><table>
+      <thead><tr><th>Name</th><th>What it does</th><th>How long</th></tr></thead>
+      <tbody>
+        <tr><td>pm_session (cookie)</td><td>Keeps you signed in. Only set if you sign in.</td><td>30 days, or until you sign out</td></tr>
+        <tr><td>pm_oauth (cookie)</td><td>Protects the "Continue with Google" step from being tampered with.</td><td>10 minutes</td></tr>
+        <tr><td>Browser storage (i4t:…)</td><td>Saves your lessons, quiz, money tracker, portfolio, settings and that you've seen the cookie notice, on your device.</td><td>Until you clear it or sign out</td></tr>
+        <tr><td>Offline copy</td><td>Lets the site open without internet once you've visited, like an app.</td><td>Until you clear site data</td></tr>
+      </tbody>
+    </table></div>
+    <p style="margin-top:1em">If you choose "Continue with Google", Google's own sign-in page may set its own cookies, which are covered by Google's privacy policy. Our fonts are stored on our own site, so loading a page doesn't contact Google or any other font service.</p>
+    <p>You can clear cookies and site data in your browser settings at any time. If you do, you'll be signed out and any progress that isn't saved to an account will be lost.</p>
+  </div>
+</section>
+
+<section class="page" id="page-disclaimer">
+  <div class="legal-nav"><button class="chip" data-go="privacy">Privacy</button><button class="chip" data-go="terms">Terms</button><button class="chip" data-go="cookies">Cookies</button><button class="chip" aria-pressed="true">Disclaimer</button></div>
+  <div class="prose">
+    <h2>Disclaimer</h2>
+    <p class="muted">Last updated 9 October 2026</p>
+    <p><b>Pocket Money is for education only.</b> Nothing on this site is financial, investment, tax or legal advice, and nothing is a recommendation to buy, sell or hold any investment.</p>
+    <ul>
+      <li>Pocket Money is not registered with the Securities and Exchange Board of India (SEBI) as an investment adviser or research analyst, or with any other financial regulator.</li>
+      <li>Companies on the Research page are shown to help you learn how to research. Being listed or appearing in "popular" lists is not a recommendation.</li>
+      <li>Real-company share prices are delayed by at least 30 days, in line with SEBI's rules for investor-education platforms. Company descriptions and financial figures come from third-party data sources and may be out of date or contain errors. Always check a company's own annual report.</li>
+      <li>The practice portfolio uses made-up companies and simulated prices. How they behave doesn't predict real markets.</li>
+      <li>Past performance doesn't tell you what will happen in the future. Investments can fall in value and you can get back less than you put in.</li>
+      <li>Before investing real money, talk to a parent or guardian. In India and most countries, under-18s need an adult to open and run an investment account for them.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <b style="color:var(--ink)">Pocket Money</b><br>
+      Free money and investing lessons for teens. Education only, not financial advice.
+      <div class="socials" id="foot-socials"></div>
+    </div>
+    <nav aria-label="Footer">
+      <button data-go="about">About the founder</button>
+      <button data-go="contact">Contact</button>
+      <button data-go="privacy">Privacy</button>
+      <button data-go="terms">Terms</button>
+      <button data-go="cookies">Cookies</button>
+      <button data-go="disclaimer">Disclaimer</button>
+    </nav>
+  </div>
+</footer>
+
+<div class="cookie" id="cookie" hidden role="region" aria-label="Cookie notice">
+  <p>Pocket Money uses one essential cookie to keep you signed in, and saves your progress on this device. No ads or tracking. <a href="#cookies" data-go="cookies">Cookie policy</a></p>
+  <button class="btn small" id="cookie-ok">Got it</button>
+</div>
+
+<dialog id="login-dlg" aria-labelledby="login-title">
+  <div class="dlg" id="login-body"></div>
+</dialog>
+
+<noscript><p style="padding:20px">Pocket Money needs JavaScript turned on.</p></noscript>
+<script src="app.js"></script>
+</body>
+</html>

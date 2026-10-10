@@ -1,0 +1,13 @@
+{
+  "name": "pocket-money",
+  "private": true,
+  "type": "module",
+  "description": "Free money and investing lessons for teens",
+  "scripts": {
+    "dev": "node dev/server.mjs",
+    "build:app": "python3 tools/build_site.py"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
