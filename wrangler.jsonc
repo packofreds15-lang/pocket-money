@@ -16,6 +16,19 @@
     }
   ],
   // Keep the variables you add in the Cloudflare dashboard (ADMIN_EMAILS, GOOGLE_CLIENT_ID, ...) on every deploy.
-  "keep_vars": true,
-  "observability": { "enabled": true }
+  "keep_vars": true,{
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "invocation_logs": true,
+      "persist": true
+    },
+    "traces": {
+      "enabled": false,
+      "head_sampling_rate": 1,
+      "persist": true
+    }
+  },
+  // ...
 }
